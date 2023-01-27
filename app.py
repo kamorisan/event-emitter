@@ -6,6 +6,8 @@ import random
 import time
 import uuid
 
+from decimal import Decimal
+
 from kafka import KafkaProducer
 
 EVENT_TEMPLATES = [
@@ -8029,7 +8031,7 @@ def main(args):
     while True:
 
         producer.send(args.topic,json.dumps(generate_event()).encode() , 'cust567'.encode())
-        time.sleep(10.0)
+        time.sleep(args.rate)
     logging.info('end sending events')
 
 
@@ -8059,7 +8061,7 @@ if __name__ == '__main__':
         default='event-input-stream')
     parser.add_argument(
         '--rate',
-        type=int,
+        type=decimal,
         help='Lines per second, env variable RATE',
         default=1)
     args = parse_args(parser)
