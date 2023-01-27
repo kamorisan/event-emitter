@@ -8029,7 +8029,7 @@ def main(args):
     while True:
 
         producer.send(args.topic,json.dumps(generate_event()).encode() , 'cust567'.encode())
-        time.sleep(args.rate)
+        time.sleep(float(args.rate))
     logging.info('end sending events')
 
 
