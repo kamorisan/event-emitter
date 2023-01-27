@@ -8059,7 +8059,7 @@ if __name__ == '__main__':
         default='event-input-stream')
     parser.add_argument(
         '--rate',
-        type=float,
+        type=int,
         help='Lines per second, env variable RATE',
         default=1)
     args = parse_args(parser)
