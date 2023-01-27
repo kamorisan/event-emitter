@@ -6,8 +6,6 @@ import random
 import time
 import uuid
 
-from decimal import Decimal
-
 from kafka import KafkaProducer
 
 EVENT_TEMPLATES = [
@@ -8061,7 +8059,7 @@ if __name__ == '__main__':
         default='event-input-stream')
     parser.add_argument(
         '--rate',
-        type=decimal,
+        type=float,
         help='Lines per second, env variable RATE',
         default=1)
     args = parse_args(parser)
