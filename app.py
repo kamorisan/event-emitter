@@ -10,8 +10,8 @@ from kafka import KafkaProducer
 
 ORDER_TYPES = ["E", "F", "G"]
 ORDER_ITEM_NAMES = ["Lime", "Lemon Bar", "Fruit Punch"]
-QUANTITIES = [100, 17, 16]
-PRICES = [3.69, 0.09, 7.76]
+QUANTITIES = [random.randint(10, 200)]
+PRICES = [round(random.uniform(0.01, 9.99), 2)]
 SHIPMENT_ADDRESSES = ["541-428 Nulla Avenue", "Ap #249-5876 Magna. Rd.", "525-8975 Urna. Street"]
 ZIP_CODES = ["4286", "I9E 0JN", "13965"]
 
