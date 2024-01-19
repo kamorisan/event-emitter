@@ -10,8 +10,8 @@ from kafka import KafkaProducer
 
 ORDER_TYPES = ["E", "F", "G"]
 ORDER_ITEM_NAMES = ["Lime", "Lemon Bar", "Fruit Punch"]
-QUANTITIES = [random.randint(10, 200)]
-PRICES = [round(random.uniform(0.01, 9.99), 2)]
+#QUANTITIES
+#PRICES
 SHIPMENT_ADDRESSES = ["541-428 Nulla Avenue", "Ap #249-5876 Magna. Rd.", "525-8975 Urna. Street"]
 ZIP_CODES = ["4286", "I9E 0JN", "13965"]
 
@@ -20,8 +20,8 @@ def generate_event():
     ret = {
           "orderType": random.choice(ORDER_TYPES),
           "orderItemName": random.choice(ORDER_ITEM_NAMES),
-          "quantity": random.choice(QUANTITIES),
-          "price": random.choice(PRICES),
+          "quantity": random.randint(10, 200),
+          "price": round(random.uniform(0.01, 9.99), 2),
           "shipmentAddress": random.choice(SHIPMENT_ADDRESSES),
           "zipCode": random.choice(ZIP_CODES)
         }
