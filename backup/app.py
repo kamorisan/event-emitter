@@ -8,24 +8,37 @@ import uuid
 
 from kafka import KafkaProducer
 
-ORDER_TYPES = ["E", "F", "G"]
-ORDER_ITEM_NAMES = ["Lime", "Lemon Bar", "Fruit Punch"]
-QUANTITIES = [100, 17, 16]
-PRICES = [3.69, 0.09, 7.76]
-SHIPMENT_ADDRESSES = ["541-428 Nulla Avenue", "Ap #249-5876 Magna. Rd.", "525-8975 Urna. Street"]
-ZIP_CODES = ["4286", "I9E 0JN", "13965"]
-
+EVENT_TEMPLATES = [
+  {
+    "orderType": "E",
+    "orderItemName": "Lime",
+    "quantity": 100,
+    "price": 3.69,
+    "shipmentAddress": "541-428 Nulla Avenue",
+    "zipCode": "4286"
+  },
+  {
+    "orderType": "E",
+    "orderItemName": "Lemon Bar",
+    "quantity": 17,
+    "price": 0.09,
+    "shipmentAddress": "Ap #249-5876 Magna. Rd.",
+    "zipCode": "I9E 0JN"
+  },
+  {
+    "orderType": "E",
+    "orderItemName": "Fruit Punch",
+    "quantity": 16,
+    "price": 7.76,
+    "shipmentAddress": "525-8975 Urna. Street",
+    "zipCode": "13965"
+  }
+]
 
 def generate_event():
-    ret = {
-          "orderType": random.choice(ORDER_TYPES),
-          "orderItemName": random.choice(ORDER_ITEM_NAMES),
-          "quantity": random.choice(QUANTITIES),
-          "price": random.choice(PRICES),
-          "shipmentAddress": random.choice(SHIPMENT_ADDRESSES),
-          "zipCode": random.choice(ZIP_CODES)
-        }
+    ret = EVENT_TEMPLATES[random.randrange(1000)]
     return ret
+
 
 def main(args):
     logging.info('brokers={}'.format(args.brokers))
