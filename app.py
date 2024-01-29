@@ -22,7 +22,7 @@ def load_csv_data(file_path):
 
 # DATA 
 #ORDER_ITEM_NAMES = ["Lime", "Lemon Bar", "Fruit Punch"]
-ORDER_ITEM_NAMES = load_csv_data("csvdata/item_names.csv")
+ORDER_ITEM_NAMES = load_csv_data("csvdata/order_item_names.csv")
 #QUANTITIES
 #PRICES
 SHIPMENT_ADDRESSES = ["541-428 Nulla Avenue", "Ap #249-5876 Magna. Rd.", "525-8975 Urna. Street"]
