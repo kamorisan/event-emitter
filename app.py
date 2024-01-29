@@ -28,8 +28,12 @@ SHIPMENT_ADDRESSES = load_csv_data("csvdata/shipment_addresses.csv")
 #クレジッドカード情報
 ## CC_NUMBER
 ## CC_EXPIRY_DATE
-## CC_TYPE
+CC_TYPE = load_csv_data("csvdata/cc_type.csv")
 ## NAME
+
+# ランダムな4桁の数を4組生成し、ハイフンで連結する
+random_numbers = [str(random.randint(0, 9999)).zfill(4) for _ in range(4)]
+CC_NUMBER = "-".join(random_numbers)
 
 def generate_event():
     ret = {
@@ -38,7 +42,10 @@ def generate_event():
         "quantity": random.randint(10, 200),
         "price": round(random.uniform(0.01, 9.99), 2),
         "shipmentAddress": random.choice(SHIPMENT_ADDRESSES),
-        "zipCode": random.randint(10000, 99999)
+        "zipCode": random.randint(10000, 99999),
+        "creditCardNumber": "-".join([str(random.randint(0, 9999)).zfill(4) for _ in range(4)]),
+        "creditCardExpiryDate": "{:04d}/{:02d}".format(random.randint(2023, 2030), random.randint(1, 12)),
+        "creditCardType": random.choice(CC_TYPE)
         }
     return ret
 
