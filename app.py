@@ -9,6 +9,19 @@ import uuid
 
 from kafka import KafkaProducer
 
+# DATA LOAD
+#ORDER_ITEM_NAMES = ["Lime", "Lemon Bar", "Fruit Punch"]
+ORDER_ITEM_NAMES = load_csv_data("csvdata/order_item_names.csv")
+#QUANTITIES
+#PRICES
+SHIPMENT_ADDRESSES = load_csv_data("csvdata/shipment_addresses.csv")
+#ZIP_CODES = ["4286", "I9E 0JN", "13965"]
+#クレジッドカード情報
+## CC_NUMBER
+## CC_EXPIRY_DATE
+## CC_TYPE
+## NAME
+
 # Function to load data from CSV file
 def load_csv_data(file_path):
     data = []
@@ -22,29 +35,14 @@ def load_csv_data(file_path):
             data.extend(cleaned_row)
     return data
 
-# DATA 
-#ORDER_ITEM_NAMES = ["Lime", "Lemon Bar", "Fruit Punch"]
-ORDER_ITEM_NAMES = load_csv_data("csvdata/order_item_names.csv")
-#QUANTITIES
-#PRICES
-SHIPMENT_ADDRESSES = ["541-428 Nulla Avenue", "Ap #249-5876 Magna. Rd.", "525-8975 Urna. Street"]
-ZIP_CODES = ["4286", "I9E 0JN", "13965"]
-#クレジッドカード情報
-## CC_NUMBER
-## CC_EXPIRY_DATE
-## CC_TYPE
-## NAME
-
-
-
 def generate_event():
     ret = {
-          "orderID": str(uuid.uuid4()),  # UUIDを文字列に変換する
-          "orderItemName": random.choice(ORDER_ITEM_NAMES),
-          "quantity": random.randint(10, 200),
-          "price": round(random.uniform(0.01, 9.99), 2),
-          "shipmentAddress": random.choice(SHIPMENT_ADDRESSES),
-          "zipCode": random.choice(ZIP_CODES)
+        "orderID": str(uuid.uuid4()),  # UUIDを文字列に変換する
+        "orderItemName": random.choice(ORDER_ITEM_NAMES),
+        "quantity": random.randint(10, 200),
+        "price": round(random.uniform(0.01, 9.99), 2),
+        "shipmentAddress": random.choice(SHIPMENT_ADDRESSES),
+        "zipCode": random.randint(10000, 99999)
         }
     return ret
 
