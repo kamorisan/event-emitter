@@ -23,22 +23,18 @@ def load_csv_data(file_path):
     return data
 
 # DATA LOAD
+FIRST_NAME = load_csv_data("csvdata/first_name.csv")
+LAST_NAME = load_csv_data("csvdata/last_name.csv")
 ORDER_ITEM_NAMES = load_csv_data("csvdata/order_item_names.csv")
 SHIPMENT_ADDRESSES = load_csv_data("csvdata/shipment_addresses.csv")
-#クレジッドカード情報
-## CC_NUMBER
-## CC_EXPIRY_DATE
 CC_TYPE = load_csv_data("csvdata/cc_type.csv")
-## NAME
-
-# ランダムな4桁の数を4組生成し、ハイフンで連結する
-random_numbers = [str(random.randint(0, 9999)).zfill(4) for _ in range(4)]
-CC_NUMBER = "-".join(random_numbers)
 
 def generate_event():
     ret = {
         "orderID": str(uuid.uuid4()),  # UUIDを文字列に変換する
         "orderItemName": random.choice(ORDER_ITEM_NAMES),
+        "firstName": random.choice(FIRST_NAME),
+        "lastName": random.choice(LAST_NAME),
         "quantity": random.randint(10, 200),
         "price": round(random.uniform(0.01, 9.99), 2),
         "shipmentAddress": random.choice(SHIPMENT_ADDRESSES),
