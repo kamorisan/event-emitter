@@ -1,4 +1,5 @@
 import argparse
+import csv
 import json
 import logging
 import os
@@ -7,6 +8,15 @@ import time
 import uuid
 
 from kafka import KafkaProducer
+
+# Function to load data from CSV file
+def load_csv_data(file_path):
+    data = []
+    with open(file_path, newline='') as csvfile:
+        reader = csv.reader(csvfile)
+        for row in reader:
+            data.append(row[0])  # Assuming the item names are in the first column
+    return data
 
 ORDER_TYPES = ["E", "F", "G"]
 #ORDER_ITEM_NAMES = ["Lime", "Lemon Bar", "Fruit Punch"]
@@ -21,14 +31,7 @@ ZIP_CODES = ["4286", "I9E 0JN", "13965"]
 ## CC_TYPE
 ## NAME
 
-# Function to load data from CSV file
-def load_csv_data(file_path):
-    data = []
-    with open(file_path, newline='') as csvfile:
-        reader = csv.reader(csvfile)
-        for row in reader:
-            data.append(row[0])  # Assuming the item names are in the first column
-    return data
+
 
 def generate_event():
     ret = {

@@ -3,7 +3,7 @@ kind: DeploymentConfig
 apiVersion: v1
 metadata:
   name: kafdrop
-  namespace: my-kafka
+  namespace: test
   labels:
     app: kafdrop
   annotations:
