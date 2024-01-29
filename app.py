@@ -9,12 +9,26 @@ import uuid
 from kafka import KafkaProducer
 
 ORDER_TYPES = ["E", "F", "G"]
-ORDER_ITEM_NAMES = ["Lime", "Lemon Bar", "Fruit Punch"]
+#ORDER_ITEM_NAMES = ["Lime", "Lemon Bar", "Fruit Punch"]
+ORDER_ITEM_NAMES = load_csv_data("item_names.csv")
 #QUANTITIES
 #PRICES
 SHIPMENT_ADDRESSES = ["541-428 Nulla Avenue", "Ap #249-5876 Magna. Rd.", "525-8975 Urna. Street"]
 ZIP_CODES = ["4286", "I9E 0JN", "13965"]
+#クレジッドカード情報
+## CC_NUMBER
+## CC_EXPIRY_DATE
+## CC_TYPE
+## NAME
 
+# Function to load data from CSV file
+def load_csv_data(file_path):
+    data = []
+    with open(file_path, newline='') as csvfile:
+        reader = csv.reader(csvfile)
+        for row in reader:
+            data.append(row[0])  # Assuming the item names are in the first column
+    return data
 
 def generate_event():
     ret = {
