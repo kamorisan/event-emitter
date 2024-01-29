@@ -37,7 +37,7 @@ ZIP_CODES = ["4286", "I9E 0JN", "13965"]
 
 def generate_event():
     ret = {
-          "orderID": uuid.uuid4(),
+          "orderID": str(uuid.uuid4()),  # UUIDを文字列に変換する
           "orderItemName": random.choice(ORDER_ITEM_NAMES),
           "quantity": random.randint(10, 200),
           "price": round(random.uniform(0.01, 9.99), 2),
