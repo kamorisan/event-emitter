@@ -15,7 +15,9 @@ def load_csv_data(file_path):
     with open(file_path, newline='') as csvfile:
         reader = csv.reader(csvfile)
         for row in reader:
-            data.append(row[0])  # Assuming the item names are in the first column
+            # Clean each item in the row (removing extra spaces and quotes)
+            cleaned_row = [item.strip().strip('"') for item in row]
+            data.extend(cleaned_row)
     return data
 
 ORDER_TYPES = ["E", "F", "G"]
