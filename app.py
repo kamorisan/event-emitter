@@ -20,9 +20,9 @@ def load_csv_data(file_path):
             data.extend(cleaned_row)
     return data
 
-ORDER_TYPES = ["E", "F", "G"]
+# DATA 
 #ORDER_ITEM_NAMES = ["Lime", "Lemon Bar", "Fruit Punch"]
-ORDER_ITEM_NAMES = load_csv_data("item_names.csv")
+ORDER_ITEM_NAMES = load_csv_data("csvdata/item_names.csv")
 #QUANTITIES
 #PRICES
 SHIPMENT_ADDRESSES = ["541-428 Nulla Avenue", "Ap #249-5876 Magna. Rd.", "525-8975 Urna. Street"]
@@ -37,7 +37,7 @@ ZIP_CODES = ["4286", "I9E 0JN", "13965"]
 
 def generate_event():
     ret = {
-          "orderType": random.choice(ORDER_TYPES),
+          "orderID": uuid.uuid4(),
           "orderItemName": random.choice(ORDER_ITEM_NAMES),
           "quantity": random.randint(10, 200),
           "price": round(random.uniform(0.01, 9.99), 2),
