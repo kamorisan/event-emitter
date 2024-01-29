@@ -17,6 +17,8 @@ def load_csv_data(file_path):
         for row in reader:
             # Clean each item in the row (removing extra spaces and quotes)
             cleaned_row = [item.strip().strip('"') for item in row]
+            # Remove empty strings from the cleaned row
+            cleaned_row = [item for item in cleaned_row if item]  # Filter out empty strings
             data.extend(cleaned_row)
     return data
 
