@@ -76,11 +76,6 @@ def get_arg(env, default):
 
 
 def parse_args(parser):
-    parser.add_argument(
-        '--iterations',
-        type=int,
-        help='Number of events to send, env variable ITERATIONS. -1 for infinite loop',
-        default=-1)
     args = parser.parse_args()
     args.brokers = get_arg('KAFKA_BROKERS', args.brokers)
     args.topic = get_arg('KAFKA_TOPIC', args.topic)
