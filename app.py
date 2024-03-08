@@ -80,7 +80,7 @@ def parse_args(parser):
     args.brokers = get_arg('KAFKA_BROKERS', args.brokers)
     args.topic = get_arg('KAFKA_TOPIC', args.topic)
     args.rate = get_arg('RATE', args.rate)
-    args.iterations = get_arg('ITERATIONS', args.iterations)  # 環境変数からの読み込みをサポート
+    args.iterations = int(get_arg('ITERATIONS', args.iterations))  # 環境変数からの読み込みをサポート
     return args
 
 
