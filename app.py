@@ -49,15 +49,25 @@ def main(args):
     logging.info('brokers={}'.format(args.brokers))
     logging.info('topic={}'.format(args.topic))
     logging.info('rate={}'.format(args.rate))
+    logging.info('iterations={}'.format(args.iterations))
 
     logging.info('creating kafka producer')
     producer = KafkaProducer(bootstrap_servers=args.brokers)
 
+    count = 0  # 送信回数を追跡するカウンター
     logging.info('begin sending events')
     while True:
+        if args.iterations != -1 and count >= args.iterations:
+            break  # 指定された回数に達したらループを終了
+        
+        event = generate_event()  # イベントを生成
+        event_key = event["orderID"].encode()  # orderIDをキーとしてエンコード
+        event_value = json.dumps(event).encode()  # イベントデータをJSON形式に変換し、バイト列にエンコード
 
-        producer.send(args.topic,json.dumps(generate_event()).encode() , 'cust567'.encode())
+        producer.send(args.topic, key=event_key, value=event_value)  # キーと値を指定して送信
         time.sleep(float(args.rate))
+        count += 1  # カウンターをインクリメント
+
     logging.info('end sending events')
 
 
@@ -66,10 +76,16 @@ def get_arg(env, default):
 
 
 def parse_args(parser):
+    parser.add_argument(
+        '--iterations',
+        type=int,
+        help='Number of events to send, env variable ITERATIONS. -1 for infinite loop',
+        default=-1)
     args = parser.parse_args()
     args.brokers = get_arg('KAFKA_BROKERS', args.brokers)
     args.topic = get_arg('KAFKA_TOPIC', args.topic)
     args.rate = get_arg('RATE', args.rate)
+    args.iterations = get_arg('ITERATIONS', args.iterations)  # 環境変数からの読み込みをサポート
     return args
 
 
@@ -90,6 +106,11 @@ if __name__ == '__main__':
         type=int,
         help='Lines per second, env variable RATE',
         default=1)
+    parser.add_argument(
+        '--iterations',
+        type=int,
+        help='Number of events to send, env variable ITERATIONS. -1 for infinite loop',
+        default=-1)
     args = parse_args(parser)
     main(args)
     logging.info('exiting')
