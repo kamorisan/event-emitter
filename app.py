@@ -58,15 +58,20 @@ def main(args):
     logging.info('begin sending events')
     while True:
         if args.iterations != -1 and count >= args.iterations:
-            break  # 指定された回数に達したらループを終了
-        
-        event = generate_event()  # イベントを生成
-        event_key = event["orderID"].encode()  # orderIDをキーとしてエンコード
-        event_value = json.dumps(event).encode()  # イベントデータをJSON形式に変換し、バイト列にエンコード
+            # 指定された回数に達したら、無限ループを終了させずに何らかの待機処理を実行
+            logging.info('Completed sending the specified number of events. Entering wait state.')
+            while True:
+                # ここで待機中に実行したい任意の処理を行います
+                logging.info('Waiting...')
+                time.sleep(60)  # 60秒待機
+        else:
+            event = generate_event()
+            event_key = event["orderID"].encode()
+            event_value = json.dumps(event).encode()
 
-        producer.send(args.topic, key=event_key, value=event_value)  # キーと値を指定して送信
-        time.sleep(float(args.rate))
-        count += 1  # カウンターをインクリメント
+            producer.send(args.topic, key=event_key, value=event_value)
+            time.sleep(float(args.rate))
+            count += 1  # カウンターをインクリメント
 
     logging.info('end sending events')
 
