@@ -77,7 +77,7 @@ def main(args):
 
 
 def get_arg(env, default):
-    return os.getenv(env) if os.getenv(env, '') is not '' else default
+    return os.getenv(env) if os.getenv(env, '') != '' else default
 
 
 def parse_args(parser):
